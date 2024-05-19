@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apock web design</title>
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+</head>
+
+<body>
+    <!--======================================
+=            Apock web design            =
+=======================================
+
+Gracias por utilizar mi contenido!
+Me siento agradecido compartiendo para Uds
+No olvides seguirme en:
+👉 Instagram - https://www.instagram.com/ApockGraficos
+👉 Twitter - https://twitter.com/ApockGraficos
+👉 Faccobook - https://www.facebook.com/ApockGraficos
+
+====-->
+
+    <!--==========================
+=            html            =
+===========================-->
+    <section class="seccion-perfil-usuario">
+        <div class="perfil-usuario-header">
+            <div class="perfil-usuario-portada">
+                <div class="perfil-usuario-avatar">
+                    <img [src]="getUserImage()" alt="Imagen de usuario" class="imagen-usuario">
+                    <button type="button" class="boton-avatar">
+                        <i class="far fa-image"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="perfil-usuario-body">
+            <div class="perfil-usuario-bio">
+                <h3 class="titulo">{{ apel_nomb }}</h3>
+                <p class="texto">{{ descripcion }}</p>
+            </div>
+            <div class="perfil-usuario-footer">
+                <ul class="lista-datos">
+                    <li><i class="icono fas fa-phone-alt"></i> Telefono: {{ telefono }}</li>
+                    <li><i class="icono fas fa-briefcase"></i> Tipo de usuario: {{ tipo_usuarioapp }}</li>
+                    <li><i class="icono fas fa-share-alt"></i> Gmail: {{ gmail }}</li>
+                </ul>
+                <ul class="lista-datos">
+                    <li><i class="icono fas fa-map-marker-alt"></i> Ubicacion: Paita</li>
+                    <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento: {{ fecha_nacimiento }}</li>
+                    <li><i class="icono fas fa-user-check"></i> Registro: 19/05/2020</li>
+                </ul>
+            </div>
+            <div class="redes-sociales">
+                <button class="boton-redes instagram" (click)="mostrarSegundoElemento()">
+                    <i class="fas fa-cog"></i>
+                </button>                 
+            </div>
+        </div>
+        <div class="perfil-usuario-body segunda" *ngIf="mostrarSegundo">
+            <div class="perfil-usuario-bio">
+                <li>
+                    <i></i> Descripcion:
+                    <input type="text" [(ngModel)]="descripcion" class="descripcion-input">
+                    <span class="caracteres-restantes">{{ 250 - descripcion.length }} caracteres restantes</span>
+                  </li>
+            </div>
+            <div class="perfil-usuario-footer">
+                <ul class="lista-datos">
+                    <li>
+                        <i class="icono fas fa-phone-alt"></i> Telefono: 
+                        <input type="text" [(ngModel)]="telefono" name="telefono" #telefonoInput="ngModel"
+                               pattern="^9\d{8}$" minlength="9" maxlength="9" required>
+                        <div *ngIf="telefonoInput.errors && (telefonoInput.dirty || telefonoInput.touched)">
+                          <small *ngIf="telefonoInput.errors['required']" class="text-danger">El teléfono es requerido.</small>
+                          <small *ngIf="telefonoInput.errors['pattern']" class="text-danger">El teléfono debe tener 9 dígitos y empezar con 9.</small>
+                          <small *ngIf="telefonoInput.errors['minlength'] || telefonoInput.errors['maxlength']" class="text-danger">El teléfono debe tener exactamente 9 dígitos.</small>
+                        </div>
+                      </li>                 
+                    <li><i class="icono fas fa-briefcase"></i> Tipo de usuario: {{ tipo_usuarioapp }}</li>
+                    <li>
+                        <i class="icono fas fa-share-alt"></i> Gmail:
+                        <input type="email" [(ngModel)]="gmail" name="gmail" required>
+                      </li>
+                    </ul>
+                <ul class="lista-datos">
+                    <li><i class="icono fas fa-map-marker-alt"></i> Ubicacion: Paita</li>
+                    <li><i class="icono fas fa-calendar-alt"></i> Fecha nacimiento: <input type="date" [(ngModel)]="fecha_nacimiento"></li>
+                    <li><i class="icono fas fa-user-check"></i> Registro: 19/05/2020</li>
+                </ul>
+                <button class="boton-actualizar" (click)="actualizarUsuario()">
+                    Actualizar
+                </button>
+            </div>
+            <div class="redes-sociales">
+                <button class="boton-redes instagram" (click)="ocultarSegundoElemento()">
+                    <i class="fas fa-times"></i>
+                </button>                             
+            </div>
+        </div>        
+    </section>
+        
+</body>
+
+</html>
